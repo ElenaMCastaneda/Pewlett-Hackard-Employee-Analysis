@@ -1,0 +1,46 @@
+--1.
+select employees.emp_no, employees.last_name, employees.first_name, employees.gender, salaries.salary 
+from employees, salaries
+where employees.emp_no = salaries.emp_no
+
+--2.
+select * from employees 
+where hire_date >='1986-01-01 00:00:00'
+and hire_date <='1987-01-01 00:00:00'
+
+--3.
+select department.dept_no, department.dept_name, employees.emp_no, employees.last_name, employees.first_name, employees.hire_date, titles.to_date    
+from  employees, department , titles , dept_manager
+where department.dept_no = dept_manager.dept_no and dept_manager.emp_no = employees.emp_no and employees.emp_no = titles.emp_no
+and titles.title='Manager'
+
+--4.
+select department.dept_name, employees.emp_no, employees.last_name, employees.first_name   
+from employees, department , dept_emp
+where department.dept_no = dept_emp.dept_no and dept_emp.emp_no = employees.emp_no 
+group by department.dept_name, employees.emp_no
+
+
+--5.
+select * from employees 
+where first_name ='Hercules' 
+and last_name like 'B%'
+
+--6. 
+select department.dept_name, employees.emp_no, employees.last_name, employees.first_name   
+from employees, department , dept_emp
+where department.dept_no = dept_emp.dept_no and dept_emp.emp_no = employees.emp_no 
+and department.dept_name = 'Sales'
+
+--7.
+select department.dept_name, employees.emp_no, employees.last_name, employees.first_name   
+from employees, department , dept_emp
+where department.dept_no = dept_emp.dept_no and dept_emp.emp_no = employees.emp_no 
+and department.dept_name in ('Sales','Development')
+order by department.dept_name, employees.last_name
+
+--8.
+select last_name, count(*)
+from employees
+group by last_name
+order by 2
